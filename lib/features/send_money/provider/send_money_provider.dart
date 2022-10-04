@@ -1,6 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 
-final sendMoneyProvider = StateNotifierProvider.autoDispose((ref) {
+final sendMoneyProvider = StateNotifierProvider((ref) {
   return SendMoney();
 });
 

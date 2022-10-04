@@ -1,6 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 
-final notFoundProvider = StateNotifierProvider.autoDispose((ref) {
+final notFoundProvider = StateNotifierProvider((ref) {
   return NotFound();
 });
 

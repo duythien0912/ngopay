@@ -1,6 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 
-final transactionProvider = StateNotifierProvider.autoDispose((ref) {
+final transactionProvider = StateNotifierProvider((ref) {
   return Transaction();
 });
 

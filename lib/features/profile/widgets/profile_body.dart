@@ -1,9 +1,9 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:ngopay/features/onboarding/controller/skip_onboarding_controller.dart';
 import 'package:ngopay/features/profile/provider/provider.dart';
 import 'package:ngopay/features/sign_in/controller/skip_sign_in_controller.dart';
+import 'package:ngopay/src/widgets/phoenix.dart';
 
 /// {@template profile_body}
 /// Body of the ProfilePage.

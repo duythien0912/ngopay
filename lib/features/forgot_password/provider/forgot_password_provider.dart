@@ -1,6 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 
-final forgotPasswordProvider = StateNotifierProvider.autoDispose((ref) {
+final forgotPasswordProvider = StateNotifierProvider((ref) {
   return ForgotPassword();
 });
 

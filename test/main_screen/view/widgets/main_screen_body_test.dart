@@ -6,9 +6,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('MainScreenBody', () {
-    testWidgets('renders Text', (tester) async { 
+    testWidgets('renders Text', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(home: MainScreenBody()),
+        MaterialApp(
+            home: MainScreenBody(
+          initialIndex: 0,
+        )),
       );
 
       expect(find.byType(Text), findsOneWidget);

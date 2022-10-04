@@ -1,40 +1,44 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:ngopay/app_ui.dart';
 import 'package:ngopay/features/onboarding/controller/controller.dart';
 import 'package:ngopay/features/sign_in/controller/controller.dart';
 import 'package:ngopay/router.dart';
+import 'package:ngopay/src/widgets/phoenix.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final container = ProviderContainer();
+  final routerDelegate = createDelegate(container.read);
+  final routeInformationParser = BeamerParser();
 
   runApp(
-    Phoenix(
-      child: Builder(
-        builder: (context) {
-          final container = ProviderContainer();
-          final routerDelegate = createDelegate(container.read);
-          final routeInformationParser = BeamerParser();
-          return UncontrolledProviderScope(
-            container: container,
-            child: BeamerProvider(
-              routerDelegate: routerDelegate,
+    Builder(
+      key: const ValueKey('main_MyApp'),
+      builder: (context) {
+        return UncontrolledProviderScope(
+          container: container,
+          child: BeamerProvider(
+            routerDelegate: routerDelegate,
+            child: Phoenix(
               child: MyApp(
-                routeInformationParser,
-                routerDelegate,
+                routeInformationParser: routeInformationParser,
+                routerDelegate: routerDelegate,
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     ),
   );
 }
 
 class MyApp extends ConsumerWidget {
-  const MyApp(this.routeInformationParser, this.routerDelegate, {Key? key})
-      : super(key: key);
+  const MyApp({
+    Key? key,
+    required this.routeInformationParser,
+    required this.routerDelegate,
+  }) : super(key: key);
 
   final RouteInformationParser<Object> routeInformationParser;
   final BeamerDelegate routerDelegate;

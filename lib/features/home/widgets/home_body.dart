@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:ngopay/features/home/provider/provider.dart';
 
@@ -17,6 +18,12 @@ class HomeBody extends ConsumerWidget {
       children: [
         Text("Home"),
         Text(count.toString()),
+        TextButton(
+          onPressed: () {
+            context.beamToNamed('/scan_barcode');
+          },
+          child: Text('Scan'),
+        ),
       ],
     );
   }

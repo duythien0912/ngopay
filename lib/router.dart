@@ -1,20 +1,18 @@
+import 'dart:developer';
+
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:ngopay/features/forgot_password/forgot_password.dart';
-import 'package:ngopay/features/home/home.dart';
 import 'package:ngopay/features/main_screen/view/main_screen_page.dart';
 import 'package:ngopay/features/not_found/view/not_found_page.dart';
 import 'package:ngopay/features/onboarding/view/onboarding_page.dart';
+import 'package:ngopay/features/pub/pub.dart';
+import 'package:ngopay/features/scan_barcode/scan_barcode.dart';
 import 'package:ngopay/features/sign_in/sign_in.dart';
 import 'package:ngopay/features/sign_in/view/sign_in_apple_page.dart';
 import 'package:ngopay/features/sign_in/view/sign_in_google_page.dart';
 import 'package:ngopay/features/sign_up/sign_up.dart';
 import 'package:ngopay/features/splash_screen/view/splash_screen_page.dart';
-import 'package:ngopay/features/transaction/view/transaction_page.dart';
-import 'package:ngopay/features/wallet/wallet.dart';
-
-import 'package:ngopay/features/profile/profile.dart';
-import 'package:ngopay/features/send_money/send_money.dart';
 
 // class AuthenticationNotifier extends StateNotifier<bool> {
 //   AuthenticationNotifier(this._authenticationRepository) : super(false) {
@@ -46,16 +44,33 @@ import 'package:ngopay/features/send_money/send_money.dart';
 BeamerDelegate createDelegate(dynamic read) {
   // read(authenticationListenerProvider)
   return BeamerDelegate(
-    initialPath: '/splash_screen',
+    initialPath: '/pub_app',
+    // initialPath: '/splash_screen',
+    // transitionDelegate: const NoAnimationTransitionDelegate(),
     locationBuilder: RoutesLocationBuilder(
       routes: {
+        // ================***================
+        // ================Splash/Onboarding Flow================
         // context.beamToNamed('/splash_screen');
         '/splash_screen': (context, state, data) => const SplashScreenPage(),
+        // context.beamToNamed('/pub_app');
+        '/pub_app': (context, state, data) => const PubSearchPage(),
+        // context.beamToNamed('/pub_app/:package_name');
+        '/pub_app/:package_name': (context, state, data) {
+          final packageName = state.pathParameters['package_name'] ?? '';
+          return PackageDetailPage(
+            packageName: packageName,
+          );
+        },
         // context.beamToNamed('/onboarding');
         '/onboarding': (context, state, data) => const BeamPage(
               type: BeamPageType.slideTransition,
               child: OnboardingPage(),
             ),
+        // ================***================
+
+        // ================***================
+        // ================SignIn/Login Flow================
         // context.beamToNamed('/sign_in');
         '/sign_in': (context, state, data) => const SignInPage(),
         // context.beamToNamed('/sign_in_email');
@@ -74,74 +89,70 @@ BeamerDelegate createDelegate(dynamic read) {
         // context.beamToNamed('/create_new_password');
         '/create_new_password': (context, state, data) =>
             const CreateNewPasswordPage(),
-        // context.beamToNamed('/main');
-        '/main': (context, state, data) => const BeamPage(
-              key: ValueKey('main_screen_page'),
-              title: 'Main Screen Page',
-              popToNamed: '/main',
-              type: BeamPageType.noTransition,
-              child: MainScreenPage(),
-            ),
+        // ================***================
+
+        // ================***================
+        // ================Home Flow================
         // context.beamToNamed('/home');
-        '/home': (context, state, data) => const BeamPage(
-              key: ValueKey('main_screen_page'),
-              title: 'Main Screen Page',
-              popToNamed: '/main',
-              type: BeamPageType.noTransition,
-              child: MainScreenPage(),
-            ),
-        // context.beamToNamed('/transaction');
-        '/transaction': (context, state, data) => const BeamPage(
-              key: ValueKey('main_screen_page'),
-              title: 'Main Screen Page',
-              popToNamed: '/main',
-              type: BeamPageType.noTransition,
-              child: MainScreenPage(),
-            ),
-        // context.beamToNamed('/send_money');
-        '/send_money': (context, state, data) => const BeamPage(
-              key: ValueKey('main_screen_page'),
-              title: 'Main Screen Page',
-              popToNamed: '/main',
-              type: BeamPageType.noTransition,
-              child: MainScreenPage(),
-            ),
-        // context.beamToNamed('/wallet');
-        '/wallet': (context, state, data) => const BeamPage(
-              key: ValueKey('main_screen_page'),
-              title: 'Main Screen Page',
-              popToNamed: '/main',
-              type: BeamPageType.noTransition,
-              child: MainScreenPage(),
-            ),
-        // context.beamToNamed('/profile');
-        '/profile': (context, state, data) => const BeamPage(
-              key: ValueKey('main_screen_page'),
-              title: 'Main Screen Page',
-              popToNamed: '/main',
-              type: BeamPageType.noTransition,
-              child: MainScreenPage(),
-            ),
-        // context.beamToNamed('/wallet/2', data: MyObject());
-        '/wallet/:walletId': (context, state, data) {
-          // final info = (data as MyObject).info;
-          final walletId = state.pathParameters['walletId']!;
+        '/home': (context, state, data) {
+          var initialIndex = 0;
+          final tab = state.queryParameters['tab'];
+          if (tab == '') {
+            initialIndex = 0;
+          }
+          if (tab == 'transaction') {
+            initialIndex = 1;
+          }
+          if (tab == 'send_money') {
+            initialIndex = 2;
+          }
+          if (tab == 'wallet') {
+            initialIndex = 3;
+          }
+          if (tab == 'profile') {
+            initialIndex = 4;
+          }
+
           return BeamPage(
-            key: ValueKey('book-$walletId'),
-            title: 'A wallet #$walletId',
-            popToNamed: '/',
-            type: BeamPageType.slideTransition,
-            child: WalletDetailPage(walletId: walletId),
+            key: const ValueKey('main_screen_page'),
+            title: 'Main Screen Page',
+            popToNamed: '/splash_screen',
+            type: BeamPageType.noTransition,
+            child: MainScreenPage(
+              initialIndex: initialIndex,
+            ),
           );
         },
-        // nested-routes
-        '*': (context, state, data) => const BeamPage(
-              key: ValueKey('undefined_page'),
-              title: 'Undefined page',
-              popToNamed: '/',
-              type: BeamPageType.slideTransition,
-              child: NotFoundPage(),
-            ),
+        // context.beamToNamed('/scan_barcode');
+        '/scan_barcode': (context, state, data) {
+          return BeamPage(
+            key: const ValueKey('scan_barcode_page'),
+            title: 'Scan barcode page',
+            child: const ScanBarcodePage(),
+            onPopPage: (context, delegate, _, page) {
+              delegate.update(
+                configuration: const RouteInformation(
+                  location: '/home?tab=send_money',
+                ),
+                rebuild: false,
+              );
+              return true;
+            },
+          );
+        },
+        // ================***================
+
+        // nested-routes hiện có bug 1 là router hết ở trong page home 2 là chỉ dùng params để điều hướng
+        '*': (context, state, data) {
+          log(state.uri.toString());
+          return const BeamPage(
+            key: ValueKey('not_found_page'),
+            title: 'Not found page',
+            popToNamed: '/splash_screen',
+            type: BeamPageType.slideTransition,
+            child: NotFoundPage(),
+          );
+        },
       },
     ),
   );

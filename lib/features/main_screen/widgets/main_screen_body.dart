@@ -1,16 +1,24 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:ngopay/app_ui.dart';
+import 'package:ngopay/features/home/view/home_page.dart';
 import 'package:ngopay/features/main_screen/provider/provider.dart';
 import 'package:ngopay/features/main_screen/widgets/routes/home_location.dart';
 import 'package:ngopay/features/main_screen/widgets/routes/profile_location.dart';
 import 'package:ngopay/features/main_screen/widgets/routes/send_money_location.dart';
 import 'package:ngopay/features/main_screen/widgets/routes/transaction_location.dart';
 import 'package:ngopay/features/main_screen/widgets/routes/wallet_location.dart';
+import 'package:ngopay/features/profile/view/profile_page.dart';
+import 'package:ngopay/features/send_money/view/send_money_page.dart';
 import 'package:ngopay/features/splash_screen/view/splash_screen_page.dart';
+import 'package:ngopay/features/transaction/view/transaction_page.dart';
+import 'package:ngopay/features/wallet/view/wallet_page.dart';
 
 class MainScreenBody extends ConsumerStatefulWidget {
-  const MainScreenBody({Key? key}) : super(key: key);
+  const MainScreenBody({Key? key, required this.initialIndex})
+      : super(key: key);
+
+  final int initialIndex;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _MainScreenBodyState();
@@ -18,79 +26,12 @@ class MainScreenBody extends ConsumerStatefulWidget {
 
 class _MainScreenBodyState extends ConsumerState<MainScreenBody> {
   // keep track of the currently selected index
-  late int _currentIndex;
+  int _currentIndex = 0;
 
-  // create two nested delegates
-  final _routerDelegates = [
-    BeamerDelegate(
-      initialPath: '/home',
-      locationBuilder: (routeInformation, _) {
-        if (routeInformation.location!.contains('/home') ||
-            routeInformation.location!.contains('/main')) {
-          return HomeLocation(routeInformation);
-        }
-        return NotFound(path: routeInformation.location!);
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/transaction',
-      locationBuilder: (routeInformation, _) {
-        if (routeInformation.location!.contains('/transaction')) {
-          return TransactionLocation(routeInformation);
-        }
-        return NotFound(path: routeInformation.location!);
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/send_money',
-      locationBuilder: (routeInformation, _) {
-        if (routeInformation.location!.contains('/send_money')) {
-          return SendMoneyLocation(routeInformation);
-        }
-        return NotFound(path: routeInformation.location!);
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/wallet',
-      locationBuilder: (routeInformation, _) {
-        if (routeInformation.location!.contains('/wallet')) {
-          return WalletLocation(routeInformation);
-        }
-        return NotFound(path: routeInformation.location!);
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/profile',
-      locationBuilder: (routeInformation, _) {
-        if (routeInformation.location!.contains('/profile')) {
-          return ProfileLocation(routeInformation);
-        }
-        return NotFound(path: routeInformation.location!);
-      },
-    ),
-  ];
-
-  // update the _currentIndex if necessary
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final uriString = Beamer.of(context).configuration.location!;
-    _currentIndex = -1;
-    if (uriString.contains('/main') || uriString.contains('/home')) {
-      _currentIndex = 0;
-    }
-    if (uriString.contains('/transaction')) {
-      _currentIndex = 1;
-    }
-    if (uriString.contains('/send_money')) {
-      _currentIndex = 2;
-    }
-    if (uriString.contains('/wallet')) {
-      _currentIndex = 3;
-    }
-    if (uriString.contains('/profile')) {
-      _currentIndex = 4;
-    }
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex;
   }
 
   @override
@@ -100,28 +41,17 @@ class _MainScreenBodyState extends ConsumerState<MainScreenBody> {
       children: [
         AppBar(
           title: const Text('Main screen'),
-          leading: SizedBox(),
+          leading: const SizedBox(),
         ),
         Expanded(
           child: IndexedStack(
             index: _currentIndex,
-            children: [
-              // use Beamer widgets as children
-              Beamer(
-                routerDelegate: _routerDelegates[0],
-              ),
-              Beamer(
-                routerDelegate: _routerDelegates[1],
-              ),
-              Beamer(
-                routerDelegate: _routerDelegates[2],
-              ),
-              Beamer(
-                routerDelegate: _routerDelegates[3],
-              ),
-              Beamer(
-                routerDelegate: _routerDelegates[4],
-              ),
+            children: const [
+              HomePage(),
+              TransactionPage(),
+              SendMoneyPage(),
+              WalletPage(),
+              ProfilePage(),
             ],
           ),
         ),
@@ -129,7 +59,6 @@ class _MainScreenBodyState extends ConsumerState<MainScreenBody> {
           currentIndex: _currentIndex,
           // backgroundColor: NgopayColors.black,
           type: BottomNavigationBarType.fixed,
-
           items: const [
             BottomNavigationBarItem(
               label: 'Home',
@@ -154,8 +83,29 @@ class _MainScreenBodyState extends ConsumerState<MainScreenBody> {
           ],
           onTap: (index) {
             if (index != _currentIndex) {
+              var tab = '';
+              if (index == 0) {
+                tab = '/home';
+              }
+              if (index == 1) {
+                tab = '/home?tab=transaction';
+              }
+              if (index == 2) {
+                tab = '/home?tab=send_money';
+              }
+              if (index == 3) {
+                tab = '/home?tab=wallet';
+              }
+              if (index == 4) {
+                tab = '/home?tab=profile';
+              }
+              Beamer.of(context).update(
+                configuration: RouteInformation(
+                  location: tab,
+                ),
+                rebuild: false,
+              );
               setState(() => _currentIndex = index);
-              _routerDelegates[_currentIndex].update(rebuild: false);
             }
           },
         ),

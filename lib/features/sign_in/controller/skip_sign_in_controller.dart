@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final skipSignInController = ChangeNotifierProvider.autoDispose((ref) {
+final skipSignInController = ChangeNotifierProvider((ref) {
   return SkipSignInController();
 });
 

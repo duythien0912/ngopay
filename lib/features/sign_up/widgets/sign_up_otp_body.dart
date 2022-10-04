@@ -31,7 +31,7 @@ class SignUpOtpBody extends ConsumerWidget {
           child: ElevatedButton(
             onPressed: () {
               ref.read(skipSignInController).skip();
-              Beamer.of(context).beamToReplacementNamed('/main');
+              Beamer.of(context).beamToReplacementNamed('/home');
             },
             child: const Text('Continue (Signup Success)'),
           ),

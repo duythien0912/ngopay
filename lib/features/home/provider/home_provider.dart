@@ -1,6 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 
-final homeProvider = StateNotifierProvider.autoDispose((ref) {
+final homeProvider = StateNotifierProvider((ref) {
   return Home();
 });
 

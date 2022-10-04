@@ -8,12 +8,15 @@ void main() {
   group('MainScreenPage', () {
     group('route', () {
       test('is routable', () {
-        expect(MainScreenPage.route(), isA<MaterialPageRoute>());
+        expect(MainScreenPage.route(0), isA<MaterialPageRoute>());
       });
     });
 
     testWidgets('renders MainScreenView', (tester) async {
-      await tester.pumpWidget(MaterialApp(home: MainScreenPage()));
+      await tester.pumpWidget(MaterialApp(
+          home: MainScreenPage(
+        initialIndex: 0,
+      )));
       expect(find.byType(MainScreenView), findsOneWidget);
     });
   });

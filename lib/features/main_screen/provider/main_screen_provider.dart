@@ -1,6 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 
-final mainScreenProvider = StateNotifierProvider.autoDispose((ref) {
+final mainScreenProvider = StateNotifierProvider((ref) {
   return MainScreen();
 });
 

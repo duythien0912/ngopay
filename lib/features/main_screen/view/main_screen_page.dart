@@ -6,19 +6,27 @@ import 'package:ngopay/features/main_screen/widgets/main_screen_body.dart';
 /// {@endtemplate}
 class MainScreenPage extends StatelessWidget {
   /// {@macro main_screen_page}
-  const MainScreenPage({super.key});
+  const MainScreenPage({super.key, required this.initialIndex});
 
   /// The static route for MainScreenPage
-  static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const MainScreenPage());
+  static Route<dynamic> route(int initialIndex) {
+    return MaterialPageRoute<dynamic>(
+      builder: (_) => MainScreenPage(
+        initialIndex: initialIndex,
+      ),
+    );
   }
-  
+
+  final int initialIndex;
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: MainScreenView(),
+    return Scaffold(
+      body: MainScreenView(
+        initialIndex: initialIndex,
+      ),
     );
-  }  
+  }
 }
 
 /// {@template main_screen_view}
@@ -26,10 +34,14 @@ class MainScreenPage extends StatelessWidget {
 /// {@endtemplate}
 class MainScreenView extends StatelessWidget {
   /// {@macro main_screen_view}
-  const MainScreenView({super.key});
+  const MainScreenView({super.key, required this.initialIndex});
+
+  final int initialIndex;
 
   @override
   Widget build(BuildContext context) {
-    return const MainScreenBody();
+    return MainScreenBody(
+      initialIndex: initialIndex,
+    );
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ngopay/features/onboarding/controller/controller.dart';
 import 'package:ngopay/features/sign_in/sign_in.dart';
 
-final splashScreenController = ChangeNotifierProvider.autoDispose((ref) {
+final splashScreenController = ChangeNotifierProvider((ref) {
   return SplashScreenController(ref);
 });
 
@@ -12,7 +12,7 @@ class SplashScreenController extends ChangeNotifier {
     this.ref,
   );
 
-  final AutoDisposeChangeNotifierProviderRef<SplashScreenController> ref;
+  final ChangeNotifierProviderRef<SplashScreenController> ref;
 
   /// init
   Future init(BuildContext context) async {
@@ -23,7 +23,7 @@ class SplashScreenController extends ChangeNotifier {
     final skipSignIn = await ref.read(skipSignInController).read();
 
     if (skipOnboarding == true && skipSignIn == true) {
-      navigator.beamToReplacementNamed('/main');
+      navigator.beamToReplacementNamed('/home');
       return;
     }
 
@@ -37,7 +37,7 @@ class SplashScreenController extends ChangeNotifier {
       return;
     }
 
-    navigator.beamToReplacementNamed('/');
+    navigator.beamToReplacementNamed('/home');
     return;
   }
 }

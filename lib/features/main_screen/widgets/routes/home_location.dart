@@ -5,7 +5,7 @@ import 'package:ngopay/features/home/home.dart';
 class HomeLocation extends BeamLocation<BeamState> {
   HomeLocation(super.routeInformation);
   @override
-  List<String> get pathPatterns => ['/*'];
+  List<String> get pathPatterns => ['*'];
 
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
@@ -15,7 +15,7 @@ class HomeLocation extends BeamLocation<BeamState> {
           type: BeamPageType.noTransition,
           child: HomePage(),
         ),
-        if (state.uri.pathSegments.length == 2)
+        if (state.pathParameters.containsKey('details'))
           const BeamPage(
             key: ValueKey('home/details'),
             title: 'Details Home',

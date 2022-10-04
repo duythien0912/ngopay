@@ -1,6 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 
-final signUpProvider = StateNotifierProvider.autoDispose((ref) {
+final signUpProvider = StateNotifierProvider((ref) {
   return SignUp();
 });
 
