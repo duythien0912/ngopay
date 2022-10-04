@@ -20,7 +20,7 @@ class SignInAppleBody extends ConsumerWidget {
           title: const Text('Sign In Apple'),
           leading: BackButton(
             onPressed: () {
-              Beamer.of(context).beamBack();
+              context.beamBack();
             },
           ),
         ),

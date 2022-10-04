@@ -17,7 +17,7 @@ class SplashScreenController extends ChangeNotifier {
   /// init
   Future init(BuildContext context) async {
     // load is skip onboarding from local db
-    final navigator = Beamer.of(context);
+    final navigator = context;
     await Future<dynamic>.delayed(const Duration(milliseconds: 800));
     final skipOnboarding = await ref.read(skipOnboardingController).read();
     final skipSignIn = await ref.read(skipSignInController).read();

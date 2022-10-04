@@ -92,7 +92,7 @@ class _OnboardingBodyState extends ConsumerState<OnboardingBody> {
               child: const Text('skip'),
               onPressed: () {
                 ref.read(skipOnboardingController).skip();
-                Beamer.of(context).beamToNamed('/sign_in');
+                context.beamToNamed('/sign_in');
               },
             ),
           ],

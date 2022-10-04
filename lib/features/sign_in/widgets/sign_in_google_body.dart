@@ -20,7 +20,7 @@ class SignInGoogleBody extends ConsumerWidget {
           title: const Text('Sign In Google'),
           leading: BackButton(
             onPressed: () {
-              Beamer.of(context).beamBack();
+              context.beamBack();
             },
           ),
         ),

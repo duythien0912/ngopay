@@ -20,7 +20,7 @@ class TransactionBody extends ConsumerWidget {
         Text(count.toString()),
         TextButton(
           onPressed: () {
-            context.beamToNamed('/scan_barcode');
+            context.beamToNamed('/home/scan_barcode');
           },
           child: Text('Scan'),
         ),

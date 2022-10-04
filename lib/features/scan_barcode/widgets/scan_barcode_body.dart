@@ -20,13 +20,8 @@ class ScanBarcodeBody extends ConsumerWidget {
           title: const Text('Scan barcode'),
           leading: BackButton(
             onPressed: () {
-              Beamer.of(context).beamBack();
-              Beamer.of(context).update(
-                configuration: RouteInformation(
-                  location: '/home?tab=send_money',
-                ),
-                rebuild: false,
-              );
+              context.popToNamed('/home');
+              // context.beamBack();
             },
           ),
         ),

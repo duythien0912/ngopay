@@ -83,33 +83,39 @@ class _MainScreenBodyState extends ConsumerState<MainScreenBody> {
           ],
           onTap: (index) {
             if (index != _currentIndex) {
-              var tab = '';
-              if (index == 0) {
-                tab = '/home';
-              }
-              if (index == 1) {
-                tab = '/home?tab=transaction';
-              }
-              if (index == 2) {
-                tab = '/home?tab=send_money';
-              }
-              if (index == 3) {
-                tab = '/home?tab=wallet';
-              }
-              if (index == 4) {
-                tab = '/home?tab=profile';
-              }
-              Beamer.of(context).update(
-                configuration: RouteInformation(
-                  location: tab,
-                ),
-                rebuild: false,
-              );
+              updateRoute(context, index);
               setState(() => _currentIndex = index);
             }
           },
         ),
       ],
     );
+  }
+
+  void updateRoute(BuildContext context, int index) {
+    var tab = '';
+    if (index == 0) {
+      tab = '/home';
+    }
+    if (index == 1) {
+      tab = '/home?tab=transaction';
+    }
+    if (index == 2) {
+      tab = '/home?tab=send_money';
+    }
+    if (index == 3) {
+      tab = '/home?tab=wallet';
+    }
+    if (index == 4) {
+      tab = '/home?tab=profile';
+    }
+    if (tab != Beamer.of(context).configuration.location) {
+      Beamer.of(context).update(
+        configuration: RouteInformation(
+          location: tab,
+        ),
+        rebuild: false,
+      );
+    }
   }
 }

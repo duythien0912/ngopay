@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,6 +15,12 @@ class PubAppbar extends StatelessWidget implements PreferredSizeWidget {
         width: 150,
       ),
       automaticallyImplyLeading: automaticallyImplyLeading,
+      leading: BackButton(
+        onPressed: () {
+          context.beamBack();
+          // Navigator.of(context).pop();
+        },
+      ),
     );
   }
 

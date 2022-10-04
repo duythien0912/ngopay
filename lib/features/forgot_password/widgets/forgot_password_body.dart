@@ -20,7 +20,7 @@ class ForgotPasswordBody extends ConsumerWidget {
           title: const Text('Forgot Password'),
           leading: BackButton(
             onPressed: () {
-              Beamer.of(context).beamBack();
+              context.beamBack();
             },
           ),
         ),
@@ -29,7 +29,7 @@ class ForgotPasswordBody extends ConsumerWidget {
           padding: const EdgeInsets.all(8),
           child: ElevatedButton(
             onPressed: () {
-              Beamer.of(context).beamToNamed('/create_new_password');
+              context.beamToNamed('/create_new_password');
             },
             child: const Text('Continue (create new pass)'),
           ),

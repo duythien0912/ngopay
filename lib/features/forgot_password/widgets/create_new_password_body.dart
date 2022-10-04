@@ -20,7 +20,7 @@ class CreateNewPasswordBody extends ConsumerWidget {
           title: const Text('Create new Password'),
           leading: BackButton(
             onPressed: () {
-              Beamer.of(context).beamBack();
+              context.beamBack();
             },
           ),
         ),
@@ -28,8 +28,8 @@ class CreateNewPasswordBody extends ConsumerWidget {
           padding: const EdgeInsets.all(8),
           child: ElevatedButton(
             onPressed: () {
-              Beamer.of(context).beamToReplacementNamed('/sign_in');
-              Beamer.of(context).beamToNamed('/sign_in_email');
+              context.beamToReplacementNamed('/sign_in');
+              context.beamToNamed('/sign_in_email');
             },
             child: const Text('Continue'),
           ),

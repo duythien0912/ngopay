@@ -25,7 +25,7 @@ class NotFoundBody extends ConsumerWidget {
           padding: const EdgeInsets.all(8),
           child: ElevatedButton(
             onPressed: () {
-              Beamer.of(context).beamToNamed('/splash_screen');
+              context.beamToNamed('/splash_screen');
             },
             child: const Text('Return home'),
           ),

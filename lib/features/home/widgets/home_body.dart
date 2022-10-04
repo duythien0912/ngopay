@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:ngopay/app_start.dart';
 import 'package:ngopay/features/home/provider/provider.dart';
 
 /// {@template home_body}
@@ -20,9 +21,15 @@ class HomeBody extends ConsumerWidget {
         Text(count.toString()),
         TextButton(
           onPressed: () {
-            context.beamToNamed('/scan_barcode');
+            context.beamToNamed('/home/scan_barcode');
           },
           child: Text('Scan'),
+        ),
+        TextButton(
+          onPressed: () {
+            startApp(context);
+          },
+          child: Text('Start mini app'),
         ),
       ],
     );

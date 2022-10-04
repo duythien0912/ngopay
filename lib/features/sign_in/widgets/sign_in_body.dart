@@ -22,7 +22,7 @@ class SignInBody extends ConsumerWidget {
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
             onPressed: () {
-              Beamer.of(context).beamToNamed('/sign_in_email');
+              context.beamToNamed('/sign_in_email');
             },
             child: Text('Continue with Email'),
           ),
@@ -31,7 +31,7 @@ class SignInBody extends ConsumerWidget {
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
             onPressed: () {
-              Beamer.of(context).beamToNamed('/sign_in_google');
+              context.beamToNamed('/sign_in_google');
             },
             child: Text('Continue with Google'),
           ),
@@ -40,7 +40,7 @@ class SignInBody extends ConsumerWidget {
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
             onPressed: () {
-              Beamer.of(context).beamToNamed('/sign_in_apple');
+              context.beamToNamed('/sign_in_apple');
             },
             child: Text('Continue with Apple'),
           ),

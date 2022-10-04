@@ -20,7 +20,7 @@ class SignInEmailBody extends ConsumerWidget {
           title: const Text('Sign In Email'),
           leading: BackButton(
             onPressed: () {
-              Beamer.of(context).beamBack();
+              context.beamBack();
             },
           ),
         ),
@@ -29,7 +29,7 @@ class SignInEmailBody extends ConsumerWidget {
           padding: const EdgeInsets.all(8.0),
           child: TextButton(
             onPressed: () {
-              Beamer.of(context).beamToNamed('/forgot_password');
+              context.beamToNamed('/forgot_password');
             },
             child: Text('Forgot Password'),
           ),
@@ -39,7 +39,7 @@ class SignInEmailBody extends ConsumerWidget {
           child: ElevatedButton(
             onPressed: () {
               ref.read(skipSignInController).skip();
-              Beamer.of(context).beamToReplacementNamed('/home');
+              context.beamToReplacementNamed('/home');
             },
             child: Text('Sign In'),
           ),
@@ -48,7 +48,7 @@ class SignInEmailBody extends ConsumerWidget {
           padding: const EdgeInsets.all(8.0),
           child: TextButton(
             onPressed: () {
-              Beamer.of(context).beamToNamed('/sign_up');
+              context.beamToNamed('/sign_up');
             },
             child: Text('Signup'),
           ),

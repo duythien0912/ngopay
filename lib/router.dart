@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:ngopay/app_start.dart';
 import 'package:ngopay/features/forgot_password/forgot_password.dart';
 import 'package:ngopay/features/main_screen/view/main_screen_page.dart';
 import 'package:ngopay/features/not_found/view/not_found_page.dart';
@@ -41,11 +42,10 @@ import 'package:ngopay/features/splash_screen/view/splash_screen_page.dart';
 
 /// TODO(thien): update template
 /// https://gist.github.com/Zambrella/73486d027fa0186d4e8ea7ccb11a5079
-BeamerDelegate createDelegate(dynamic read) {
+BeamerDelegate createDelegate() {
   // read(authenticationListenerProvider)
   return BeamerDelegate(
-    initialPath: '/pub_app',
-    // initialPath: '/splash_screen',
+    initialPath: '/splash_screen',
     // transitionDelegate: const NoAnimationTransitionDelegate(),
     locationBuilder: RoutesLocationBuilder(
       routes: {
@@ -123,8 +123,8 @@ BeamerDelegate createDelegate(dynamic read) {
             ),
           );
         },
-        // context.beamToNamed('/scan_barcode');
-        '/scan_barcode': (context, state, data) {
+        // context.beamToNamed('/home/scan_barcode');
+        '/home/scan_barcode': (context, state, data) {
           return BeamPage(
             key: const ValueKey('scan_barcode_page'),
             title: 'Scan barcode page',
@@ -140,6 +140,9 @@ BeamerDelegate createDelegate(dynamic read) {
             },
           );
         },
+
+        // ================***================
+        ...miniAppRouters,
         // ================***================
 
         // nested-routes hiện có bug 1 là router hết ở trong page home 2 là chỉ dùng params để điều hướng

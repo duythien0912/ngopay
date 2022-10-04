@@ -9,7 +9,7 @@ import 'package:ngopay/src/widgets/phoenix.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final container = ProviderContainer();
-  final routerDelegate = createDelegate(container.read);
+  final routerDelegate = createDelegate();
   final routeInformationParser = BeamerParser();
 
   runApp(
