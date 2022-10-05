@@ -8,25 +8,50 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  beamer: ^1.5.3
-  cupertino_icons: ^1.0.5
-  curved_progress_bar: ^1.0.2
-  dio: ^4.0.6
   flutter:
     sdk: flutter
-  flutter_svg: ^1.1.5
-  freezed_annotation: ^2.1.0
-  hooks_riverpod: ^2.0.2
-  pubspec_parse: ^1.2.1
-  riverpod_annotation: ^1.0.2
-  shared_preferences: ^2.0.15
+
+  # UI
+  cupertino_icons: ^1.0.5
+  curved_progress_bar: ^1.0.2
   shimmer: ^2.0.0
+  flutter_svg: ^1.1.5
+  
+  # Util
+  pubspec_parse: ^1.2.1
+
+  # Router
+  beamer: ^1.5.3
+
+  # Local Data
+  shared_preferences: ^2.0.15
+
+  # State Framework
+  hooks_riverpod: ^2.0.2
+  riverpod_annotation: ^1.0.2
+  freezed_annotation: ^2.1.0
+
+  # Network
+  dio: ^4.0.6
+  http: ^0.13.5
+  web_socket_channel: ^2.2.0
+
+  # Candle Chart lib
+  syncfusion_flutter_charts: ^20.3.47
+  candlesticks:
+    git:
+      url: https://github.com/r-mzy47/candlesticks
+  easy_web_view:
+    git:
+      url: https://github.com/rodydavis/easy_web_view
 
 dev_dependencies:
-  build_runner: ^2.0.0
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   freezed: ^2.1.1
+  build_runner: ^2.0.0
   json_serializable: ^6.3.0
   riverpod_generator: ^1.0.2
   very_good_analysis: ^2.0.4

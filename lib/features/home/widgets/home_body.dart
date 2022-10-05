@@ -27,6 +27,24 @@ class HomeBody extends ConsumerWidget {
         ),
         TextButton(
           onPressed: () {
+            context.beamToNamed('/candle_chart');
+          },
+          child: Text('Candle chart'),
+        ),
+        TextButton(
+          onPressed: () {
+            context.beamToNamed('/candle_sticks');
+          },
+          child: Text('Candle Sticks'),
+        ),
+        TextButton(
+          onPressed: () {
+            context.beamToNamed('/trading_view');
+          },
+          child: Text('Trading view'),
+        ),
+        TextButton(
+          onPressed: () {
             startApp(context);
           },
           child: Text('Start mini app'),

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:ngopay/app_start.dart';
+import 'package:ngopay/features/chart/view/candle_chart_page.dart';
 import 'package:ngopay/features/forgot_password/forgot_password.dart';
 import 'package:ngopay/features/main_screen/view/main_screen_page.dart';
 import 'package:ngopay/features/not_found/view/not_found_page.dart';
@@ -14,6 +15,9 @@ import 'package:ngopay/features/sign_in/view/sign_in_apple_page.dart';
 import 'package:ngopay/features/sign_in/view/sign_in_google_page.dart';
 import 'package:ngopay/features/sign_up/sign_up.dart';
 import 'package:ngopay/features/splash_screen/view/splash_screen_page.dart';
+
+import 'features/chart/view/candlesticks_page.dart';
+import 'features/chart/view/trading_view_page.dart';
 
 // class AuthenticationNotifier extends StateNotifier<bool> {
 //   AuthenticationNotifier(this._authenticationRepository) : super(false) {
@@ -140,6 +144,12 @@ BeamerDelegate createDelegate() {
             },
           );
         },
+        // context.beamToNamed('/candle_chart');
+        '/candle_chart': (context, state, data) => const CandleChartPage(),
+        // context.beamToNamed('/candle_sticks');
+        '/candle_sticks': (context, state, data) => const CandleSticksPage(),
+        // context.beamToNamed('/trading_view');
+        '/trading_view': (context, state, data) => const TradingViewPage(),
 
         // ================***================
         ...miniAppRouters,
