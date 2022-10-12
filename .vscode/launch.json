@@ -10,6 +10,12 @@
             "type": "dart"
         },
         {
+            "name": "ngopay douyin",
+            "request": "launch",
+            "type": "dart",
+             "program": "lib/douyin/main.dart"
+        },
+        {
             "name": "ngopay (profile mode)",
             "request": "launch",
             "type": "dart",

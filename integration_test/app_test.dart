@@ -7,8 +7,7 @@ import 'package:integration_test/integration_test.dart';
 //   --target=integration_test/iapp_test.dart
 
 void main() {
-  final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized()
-      as IntegrationTestWidgetsFlutterBinding;
+  final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('screenshot', (WidgetTester tester) async {
     // Build the app.
